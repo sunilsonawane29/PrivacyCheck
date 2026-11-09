@@ -1,0 +1,22 @@
+
+from detector import (
+    detect_emails,
+    detect_phone_numbers,
+    detect_urls,
+    detect_passwords
+)
+
+
+def scan_text(text):
+    """
+    Scan text for sensitive information.
+    """
+
+    results = {
+        "emails": detect_emails(text),
+        "phone_numbers": detect_phone_numbers(text),
+        "urls": detect_urls(text),
+        "passwords": detect_passwords(text)
+    }
+
+    return results
