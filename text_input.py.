@@ -1,0 +1,23 @@
+
+import streamlit as st
+
+
+def get_user_text():
+    """Get text entered by the user."""
+
+    user_text = st.text_area(
+        "Enter text to scan:",
+        placeholder="Paste your text here...",
+        height=200
+    )
+
+    return user_text
+
+
+def validate_input(text):
+    """Check whether input contains text."""
+
+    if not text or not text.strip():
+        return False
+
+    return True
