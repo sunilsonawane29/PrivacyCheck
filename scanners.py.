@@ -1,0 +1,44 @@
+
+import re
+
+from detector import (
+    detect_emails,
+    detect_phones,
+    detect_urls,
+    detect_passwords
+)
+
+
+def scan_text(text):
+    """Scan text for sensitive information."""
+
+    return {
+        "emails": detect_emails(text),
+        "phones": detect_phones(text),
+        "urls": detect_urls(text),
+        "passwords": detect_passwords(text)
+    }
+
+
+def mask_sensitive_data(text):
+    """Mask sensitive information before sharing."""
+
+    text = re.sub(
+        r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b',
+        '[EMAIL MASKED]',
+        text
+    )
+
+    text = re.sub(
+        r'(?<!\w)(?:\+?\d{1,3}[-.\s]?)?\d{10}(?!\w)',
+        '[PHONE MASKED]',
+        text
+    )
+
+    text = re.sub(
+        r'(?i)\b(password|passwd|pwd)\s*[:=]\s*[^\s,;]+',
+        r'\1=[PASSWORD MASKED]',
+        text
+    )
+
+    return text
