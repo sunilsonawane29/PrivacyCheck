@@ -1,0 +1,32 @@
+
+from detector import (
+    detect_emails,
+    detect_phones,
+    detect_urls,
+    detect_passwords
+)
+
+
+def test_email_detection():
+    text = "Contact admin@example.com"
+    assert "admin@example.com" in detect_emails(text)
+
+
+def test_phone_detection():
+    text = "Call 9876543210"
+    assert "9876543210" in detect_phones(text)
+
+
+def test_url_detection():
+    text = "Visit https://example.com"
+    assert "https://example.com" in detect_urls(text)
+
+
+def test_password_detection():
+    text = "password=secret123"
+    assert detect_passwords(text)
+
+
+def test_no_email_detection():
+    text = "Hello world"
+    assert detect_emails(text) == []
